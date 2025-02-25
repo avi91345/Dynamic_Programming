@@ -1,0 +1,28 @@
+class Solution {
+
+    static Boolean isSubsetSum(int arr[], int target) {
+        // code here
+        int n=arr.length+1;
+        int sum=target+1;
+        boolean[][] ar=new boolean[n][sum];
+        for(int i=0;i<n;i++){
+            ar[i][0]=true;
+        }
+        for(int i=1;i<sum;i++){
+            ar[0][i]=false;
+        }
+        for(int i=1;i<n;i++){
+            for(int j=1;j<sum;j++){
+                if(arr[i-1]<=j){
+                ar[i][j]=ar[i-1][j-arr[i-1]]||ar[i-1][j];
+                }
+                else{
+                    ar[i][j]=ar[i-1][j];
+                }
+            }
+        }
+        return ar[n-1][target];
+    }
+    
+    
+}
